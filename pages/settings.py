@@ -4,4 +4,4 @@ register_page(__name__, path='/settings', name='Settings')
 
 layout = html.Div([
     html.H1('Settings', className='text-3xl font-bold'),
-], className='flex flex-1 flex-col gap-4 p-4')
+], className='flex flex-1 flex-col gap-4')

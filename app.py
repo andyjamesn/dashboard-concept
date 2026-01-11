@@ -393,7 +393,7 @@ app.layout = eui.ThemeProvider(
                     # Main content - renders the active page
                     html.Div([
                         page_container,
-                    ], className='flex-1'),
+                    ], className='flex-1 p-4'),
                 ]),
             ]
         ),
