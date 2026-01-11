@@ -1,7 +1,7 @@
 from dash import html, register_page, callback, Input, Output
 import emerald_ui_components as eui
 
-register_page(__name__, path='/', name='Overview')
+register_page(__name__, path='/cluster/overview', name='Overview')
 
 layout = html.Div([
     # html.H3(children='Welcome to Emerald AI', className='text-4xl'),

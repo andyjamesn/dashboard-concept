@@ -19,7 +19,7 @@ NAV_MAIN = [
         'icon': 'Server',
         'isActive': True,
         'items': [
-            {'title': 'Overview', 'id': 'nav-overview', 'href': '/'},
+            {'title': 'Overview', 'id': 'nav-overview', 'href': '/cluster/overview'},
             {'title': 'Starred', 'id': 'nav-starred'},
             {'title': 'Settings', 'id': 'nav-settings'},
         ]
@@ -384,7 +384,7 @@ app.layout = eui.ThemeProvider(
                     # Main content - renders the active page
                     html.Div([
                         page_container,
-                    ], className='flex-1 p-4'),
+                    ], className='flex-1'),
                 ]),
             ]
         ),
