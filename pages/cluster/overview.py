@@ -8,6 +8,7 @@ layout = html.Div([
     eui.PageHeader(
         heading='Cluster Overview',
         description='Manage your account settings and preferences.',
+        className='p-6 border-b border-border bg-card',
         children=[
             eui.Button(
                 variant='outline',
@@ -25,100 +26,120 @@ layout = html.Div([
         ]
     ),
     html.Div([
+        html.Div([
+            eui.Card(
+                children=[
+                    eui.CardHeader(
+                        children=[
+                            eui.CardTitle(children='Pending Jobs'),
+                        ]
+                    ),
+                    eui.CardContent(
+                        children=[
+                            html.Div(
+                                children=[
+                                    html.P(children='3', className='text-6xl font-normal'),
+                                    html.Div(children=eui.LucideIcon(name='ClockFading', size=36, className='text-rose-500'), className='size-16 flex items-center shrink-0 justify-center bg-rose-100 rounded-full p-1 aspect-[1/1]'),
+                                ],
+                                className='w-full flex gap-2 justify-between items-center'
+                            )
+                        ]
+                    )
+                ]
+            ),
+            eui.Card(
+                children=[
+                    eui.CardHeader(
+                        children=[
+                            eui.CardTitle(children='Running Jobs'),
+                        ]
+                    ),
+                    eui.CardContent(
+                        children=[
+                            html.Div(
+                                children=[
+                                    html.P(children='7', className='text-6xl font-normal'),
+                                    html.Div(children=eui.LucideIcon(name='CircleFadingArrowUp', size=36, className='text-indigo-500'), className='size-16 flex items-center shrink-0 justify-center bg-indigo-100 rounded-full p-1 aspect-[1/1]'),
+                                ],
+                                className='w-full flex gap-2 justify-between'
+                            )
+                        ]
+                    )
+                ]
+            ),
+            eui.Card(
+                children=[
+                    eui.CardHeader(
+                        children=[
+                            eui.CardTitle(children='Completed Jobs'),
+                        ]
+                    ),
+                    eui.CardContent(
+                        children=[
+                            html.Div(
+                                children=[
+                                    html.P(children='5', className='text-6xl font-normal'),
+                                    html.Div(children=eui.LucideIcon(name='CheckCheck', size=36, className='text-lime-600'), className='size-16 flex items-center shrink-0 justify-center bg-lime-50 rounded-full p-1 aspect-[1/1]'),
+                                ],
+                                className='w-full flex gap-2 justify-between'
+                            )
+                        ]
+                    )
+                ]
+            ),
+            eui.Card(
+                children=[
+                    eui.CardHeader(
+                        children=[
+                            eui.CardTitle(children='Failed Jobs'),
+                        ]
+                    ),
+                    eui.CardContent(
+                        children=[
+                            html.Div(
+                                children=[
+                                    html.P(children='0', className='text-6xl font-normal'),
+                                    html.Div(children=eui.LucideIcon(name='FileQuestionMark', size=36, className='text-teal-500'), className='size-16 flex items-center shrink-0 justify-center bg-teal-100 rounded-full p-1 aspect-[1/1]'),
+                                ],
+                                className='w-full flex gap-2 justify-between'
+                            )
+                        ]
+                    )
+                ]
+            )
+        ], className='grid auto-rows-min gap-4 md:grid-cols-4'),
         eui.Card(
+            className='w-full',
             children=[
+                eui.CardHeader(
+                    children=[
+                        eui.CardTitle(children='Aggregate Cluster View'),
+                    ]
+                ),
                 eui.CardContent(
                     children=[
-                        html.Div(
-                            children=[
-                                html.Div(children=eui.LucideIcon(name='ClockFading', size=36, className='text-rose-500'), className='size-16 flex items-center shrink-0 justify-center bg-rose-100 rounded-full p-1 aspect-[1/1]'),
-                                html.P(children='Pending', className='uppercase'),
-                                html.P(children='3', className='text-6xl font-normal'),
-                            ],
-                            className='w-full flex gap-2 justify-between'
-                        )
+                        html.P('Graph'),
                     ]
-                )
+                ),
             ]
         ),
         eui.Card(
+            className='w-full',
             children=[
+                eui.CardHeader(
+                    children=[
+                        eui.CardTitle(children='Per-Host Statistics'),
+                    ]
+                ),
                 eui.CardContent(
                     children=[
-                        html.Div(
-                            children=[
-                                html.Div(children=eui.LucideIcon(name='CircleFadingArrowUp', size=36, className='text-indigo-500'), className='size-16 flex items-center shrink-0 justify-center bg-indigo-100 rounded-full p-1 aspect-[1/1]'),
-                                html.P(children='7', className='text-6xl font-normal'),
-                            ],
-                            className='w-full flex gap-2 justify-between'
-                        )
+                        html.P('Graph'),
                     ]
-                )
+                ),
             ]
         ),
-        eui.Card(
-            children=[
-                eui.CardContent(
-                    children=[
-                        html.Div(
-                            children=[
-                                html.Div(children=eui.LucideIcon(name='CheckCheck', size=36, className='text-lime-500'), className='size-16 flex items-center shrink-0 justify-center bg-lime-100 rounded-full p-1 aspect-[1/1]'),
-                                html.P(children='5', className='text-6xl font-normal'),
-                            ],
-                            className='w-full flex gap-2 justify-between'
-                        )
-                    ]
-                )
-            ]
-        ),
-        eui.Card(
-            children=[
-                eui.CardContent(
-                    children=[
-                        html.Div(
-                            children=[
-                                html.Div(children=eui.LucideIcon(name='FileQuestionMark', size=36, className='text-teal-500'), className='size-16 flex items-center shrink-0 justify-center bg-teal-100 rounded-full p-1 aspect-[1/1]'),
-                                html.P(children='0', className='text-6xl font-normal'),
-                            ],
-                            className='w-full flex gap-2 justify-between'
-                        )
-                    ]
-                )
-            ]
-        )
-    ], className='grid auto-rows-min gap-4 md:grid-cols-4'),
-    eui.Card(
-        className='w-full',
-        children=[
-            eui.CardHeader(
-                children=[
-                    eui.CardTitle(children='Aggregate Cluster View'),
-                ]
-            ),
-            eui.CardContent(
-                children=[
-                    html.P('Graph'),
-                ]
-            ),
-        ]
-    ),
-    eui.Card(
-        className='w-full',
-        children=[
-            eui.CardHeader(
-                children=[
-                    eui.CardTitle(children='Per-Host Statistics'),
-                ]
-            ),
-            eui.CardContent(
-                children=[
-                    html.P('Graph'),
-                ]
-            ),
-        ]
-    ),
-    html.Div(className='min-h-[100vh] flex-1 rounded-xl bg-muted opacity-50 md:min-h-min'),
-], className='flex flex-1 flex-col gap-4')
+    ], className='flex flex-1 flex-col gap-4 p-6'),
+])
 
 
 # Callback to show which menu item was clicked
