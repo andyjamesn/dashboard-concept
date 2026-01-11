@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, page_container
+from dash import Dash, html, dcc, page_container, page_registry, callback, Input, Output
 import emerald_ui_components as eui
 
 # Set to False for production (uses pre-built CSS only)
@@ -48,7 +48,7 @@ NAV_MAIN = [
         'title': 'Settings',
         'icon': 'Settings2',
         'items': [
-            {'title': 'General', 'id': 'nav-general', 'href': '/settings'},
+            {'title': 'General', 'id': 'nav-general', 'href': '/settings/general'},
             {'title': 'Team', 'id': 'nav-team'},
             {'title': 'Billing', 'id': 'nav-billing'},
             {'title': 'Limits', 'id': 'nav-limits'},
@@ -296,6 +296,7 @@ app.layout = eui.ThemeProvider(
     defaultTheme='system',  # Follows OS preference by default
     storageKey='emerald-ui-theme',
     children=[
+        dcc.Location(id='url', refresh=False),
         eui.SidebarProvider(
             defaultOpen=True,
             children=[
@@ -368,18 +369,8 @@ app.layout = eui.ThemeProvider(
                         html.Div([
                             eui.SidebarTrigger(id='sidebar-trigger', className='-ml-1'),
                             html.Div(className='mx-2 h-4 w-px bg-border'),  # Separator
-                            # Breadcrumbs using our components
-                            eui.Breadcrumb(children=[
-                                eui.BreadcrumbList(children=[
-                                    eui.BreadcrumbItem(className='hidden md:block', children=[
-                                        eui.BreadcrumbLink(href='#', children='Building Your Application'),
-                                    ]),
-                                    eui.BreadcrumbSeparator(className='hidden md:block'),
-                                    eui.BreadcrumbItem(children=[
-                                        eui.BreadcrumbPage(children='Data Fetching'),
-                                    ]),
-                                ]),
-                            ]),
+                            # Dynamic breadcrumbs (updated via callback)
+                            eui.Breadcrumb(id='breadcrumbs'),
                         ], className='flex items-center gap-2'),
                         # Theme toggle on the right side of header
                         html.Div([
@@ -399,6 +390,54 @@ app.layout = eui.ThemeProvider(
         ),
     ]
 )
+
+
+# Callback to update breadcrumbs based on current URL
+@callback(
+    Output('breadcrumbs', 'children'),
+    Input('url', 'pathname')
+)
+def update_breadcrumbs(pathname):
+    """Generate breadcrumb trail from URL path segments."""
+    # Handle root path
+    if pathname == '/':
+        return eui.BreadcrumbList(children=[
+            eui.BreadcrumbItem(children=[
+                eui.BreadcrumbPage(children='Home'),
+            ]),
+        ])
+
+    # Build breadcrumb trail from path segments
+    segments = [s for s in pathname.split('/') if s]
+    items = [
+        eui.BreadcrumbItem(className='hidden md:block', children=[
+            eui.BreadcrumbLink(href='/', children='Home'),
+        ]),
+    ]
+
+    path_so_far = ''
+    for i, segment in enumerate(segments):
+        path_so_far += f'/{segment}'
+        items.append(eui.BreadcrumbSeparator(className='hidden md:block'))
+
+        # Look up display name from page registry
+        name = segment.replace('-', ' ').title()
+        for page in page_registry.values():
+            if page['path'] == path_so_far:
+                name = page['name']
+                break
+
+        # Last segment is current page (not a link)
+        if i == len(segments) - 1:
+            items.append(eui.BreadcrumbItem(children=[
+                eui.BreadcrumbPage(children=name),
+            ]))
+        else:
+            items.append(eui.BreadcrumbItem(className='hidden md:block', children=[
+                eui.BreadcrumbLink(href=path_so_far, children=name),
+            ]))
+
+    return eui.BreadcrumbList(children=items)
 
 
 if __name__ == "__main__":
