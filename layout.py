@@ -4,6 +4,7 @@ import emerald_ui_components as eui
 
 from components.sidebar import create_sidebar
 from components.header import create_header
+from navigation import DEFAULT_PERSONA
 
 
 def create_layout():
@@ -12,7 +13,11 @@ def create_layout():
         defaultTheme='system',  # Follows OS preference by default
         storageKey='emerald-ui-theme',
         children=[
+            # State storage
             dcc.Location(id='url', refresh=False),
+            dcc.Store(id='persona-store', data=DEFAULT_PERSONA, storage_type='local'),
+
+            # Main layout
             eui.SidebarProvider(
                 defaultOpen=True,
                 children=[

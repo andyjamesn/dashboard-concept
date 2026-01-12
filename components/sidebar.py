@@ -2,14 +2,18 @@
 from dash import html, dcc
 import emerald_ui_components as eui
 
-from navigation import NAV_MAIN, PROJECTS, PERSONAS, DEFAULT_PERSONA
+from navigation import PERSONAS, DEFAULT_PERSONA, get_navigation_for_persona
 
 
-def create_sub_item(sub_item):
+def create_sub_item(sub_item, current_path=None):
     """Create a sub-menu item, optionally wrapped in dcc.Link for navigation."""
+    # Check if this item is active (matches current URL)
+    is_active = current_path and sub_item.get('href') == current_path
+
     button = eui.SidebarMenuSubButton(
         id=sub_item['id'],
-        children=sub_item['title']
+        children=sub_item['title'],
+        isActive=is_active
     )
     # If item has href, wrap in dcc.Link for client-side navigation
     if 'href' in sub_item:
@@ -19,7 +23,7 @@ def create_sub_item(sub_item):
     return eui.SidebarMenuSubItem(children=[button])
 
 
-def create_nav_item(item):
+def create_nav_item(item, current_path=None):
     """Create a collapsible navigation item with sub-items."""
     return eui.Collapsible(
         defaultOpen=item.get('isActive', False),
@@ -41,7 +45,7 @@ def create_nav_item(item):
                 ]),
                 eui.CollapsibleContent(children=[
                     eui.SidebarMenuSub(children=[
-                        create_sub_item(sub_item) for sub_item in item.get('items', [])
+                        create_sub_item(sub_item, current_path) for sub_item in item.get('items', [])
                     ]),
                 ]),
             ]),
@@ -49,8 +53,19 @@ def create_nav_item(item):
     )
 
 
-def create_persona_switcher():
+def create_nav_menu(persona_key: str, current_path: str = None):
+    """Create the navigation menu for a given persona."""
+    nav_items = get_navigation_for_persona(persona_key)
+    return eui.SidebarMenu(children=[
+        create_nav_item(item, current_path) for item in nav_items
+    ])
+
+
+def create_persona_switcher(current_persona=None):
     """Create the persona switcher dropdown in sidebar footer."""
+    if current_persona is None:
+        current_persona = DEFAULT_PERSONA
+
     # Build menu items for each persona
     persona_items = []
     for persona in PERSONAS:
@@ -80,11 +95,11 @@ def create_persona_switcher():
                         className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground',
                         children=[
                             html.Div([
-                                html.Div(className=f'size-3 rounded-full {DEFAULT_PERSONA["color"]}'),
-                            ], className='flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground'),
+                                html.Div(className=f'size-3 rounded-full {current_persona["color"]}'),
+                            ], className='flex aspect-square size-8 items-center justify-center rounded-lg bg-muted text-sidebar-primary-foreground'),
                             html.Div([
-                                html.Span(DEFAULT_PERSONA['name'], className='truncate font-medium'),
-                                html.Span(DEFAULT_PERSONA['description'], className='truncate text-xs text-muted-foreground'),
+                                html.Span(current_persona['name'], className='truncate font-medium'),
+                                html.Span(current_persona['description'], className='truncate text-xs text-muted-foreground'),
                             ], className='grid flex-1 text-left text-sm leading-tight'),
                             eui.LucideIcon(name='ChevronsUpDown', className='ml-auto'),
                         ]
@@ -131,38 +146,22 @@ def create_sidebar():
 
             # Sidebar Content - Navigation
             eui.SidebarContent(children=[
-                # Platform Group with collapsible items
+                # Platform Group with collapsible items - dynamic based on persona
                 eui.SidebarGroup(children=[
                     eui.SidebarGroupLabel(children='Platform'),
-                    eui.SidebarMenu(children=[
-                        create_nav_item(item) for item in NAV_MAIN
-                    ]),
+                    # Navigation menu container - updated by callback
+                    html.Div(
+                        id='sidebar-nav-menu',
+                        children=[create_nav_menu(DEFAULT_PERSONA['key'])]
+                    ),
                 ]),
-
-                # Projects Group (hidden when collapsed)
-                eui.SidebarGroup(
-                    className='group-data-[collapsible=icon]:hidden',
-                    children=[
-                        eui.SidebarGroupLabel(children='Projects'),
-                        eui.SidebarMenu(children=[
-                            eui.SidebarMenuItem(children=[
-                                eui.SidebarMenuButton(
-                                    id=project['id'],
-                                    children=[
-                                        eui.LucideIcon(name=project['icon']),
-                                        html.Span(project['name']),
-                                    ]
-                                ),
-                            ]) for project in PROJECTS
-                        ]),
-                    ]
-                ),
             ]),
 
-            # Sidebar Footer - Persona switcher
-            eui.SidebarFooter(children=[
-                create_persona_switcher(),
-            ]),
+            # Sidebar Footer - Persona switcher (updated by callback)
+            eui.SidebarFooter(
+                id='sidebar-persona-switcher',
+                children=[create_persona_switcher()]
+            ),
 
             # Rail for collapse interaction
             eui.SidebarRail(),

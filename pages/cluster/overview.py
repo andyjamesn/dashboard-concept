@@ -39,7 +39,7 @@ layout = html.Div([
                             html.Div(
                                 children=[
                                     html.P(children='3', className='text-6xl font-normal'),
-                                    html.Div(children=eui.LucideIcon(name='ClockFading', size=36, className='text-rose-500'), className='size-16 flex items-center shrink-0 justify-center bg-rose-100 rounded-full p-1 aspect-[1/1]'),
+                                    # html.Div(children=eui.LucideIcon(name='ClockFading', size=36, className='text-rose-500'), className='size-16 flex items-center shrink-0 justify-center bg-rose-100 rounded-full p-1 aspect-[1/1]'),
                                 ],
                                 className='w-full flex gap-2 justify-between items-center'
                             )
@@ -59,7 +59,7 @@ layout = html.Div([
                             html.Div(
                                 children=[
                                     html.P(children='7', className='text-6xl font-normal'),
-                                    html.Div(children=eui.LucideIcon(name='CircleFadingArrowUp', size=36, className='text-indigo-500'), className='size-16 flex items-center shrink-0 justify-center bg-indigo-100 rounded-full p-1 aspect-[1/1]'),
+                                    # html.Div(children=eui.LucideIcon(name='CircleFadingArrowUp', size=36, className='text-indigo-500'), className='size-16 flex items-center shrink-0 justify-center bg-indigo-100 rounded-full p-1 aspect-[1/1]'),
                                 ],
                                 className='w-full flex gap-2 justify-between'
                             )
@@ -79,7 +79,7 @@ layout = html.Div([
                             html.Div(
                                 children=[
                                     html.P(children='5', className='text-6xl font-normal'),
-                                    html.Div(children=eui.LucideIcon(name='CheckCheck', size=36, className='text-lime-600'), className='size-16 flex items-center shrink-0 justify-center bg-lime-50 rounded-full p-1 aspect-[1/1]'),
+                                    # html.Div(children=eui.LucideIcon(name='CheckCheck', size=36, className='text-lime-600'), className='size-16 flex items-center shrink-0 justify-center bg-lime-50 rounded-full p-1 aspect-[1/1]'),
                                 ],
                                 className='w-full flex gap-2 justify-between'
                             )
@@ -99,7 +99,7 @@ layout = html.Div([
                             html.Div(
                                 children=[
                                     html.P(children='0', className='text-6xl font-normal'),
-                                    html.Div(children=eui.LucideIcon(name='FileQuestionMark', size=36, className='text-teal-500'), className='size-16 flex items-center shrink-0 justify-center bg-teal-100 rounded-full p-1 aspect-[1/1]'),
+                                    # html.Div(children=eui.LucideIcon(name='FileQuestionMark', size=36, className='text-teal-500'), className='size-16 flex items-center shrink-0 justify-center bg-teal-100 rounded-full p-1 aspect-[1/1]'),
                                 ],
                                 className='w-full flex gap-2 justify-between'
                             )
