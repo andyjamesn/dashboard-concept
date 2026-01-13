@@ -36,7 +36,7 @@ def create_layout():
                                 type='default',
                                 children=page_container,
                                 custom_spinner=html.Div([
-                                    eui.Loader(size=64, duration=10),
+                                    eui.Loader(size=64, duration=0.5),
                                 ], className='flex items-center justify-center h-screen'),
                             ),
                         ], className='flex-1'),
