@@ -12,8 +12,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Declare ARG for GitHub token - Railway passes matching env vars automatically
 ARG GITHUB_TOKEN
 
-# Install private package with token directly in URL
-RUN pip install --no-cache-dir git+https://${GITHUB_TOKEN}@github.com/ai-emerald/emerald-component-library.git
+# Disable git credential prompts and install private package
+ENV GIT_TERMINAL_PROMPT=0
+ENV GIT_ASKPASS=/bin/true
+RUN pip install --no-cache-dir "git+https://${GITHUB_TOKEN}@github.com/ai-emerald/emerald-component-library.git"
 
 # Copy application code
 COPY . .
