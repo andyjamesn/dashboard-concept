@@ -9,8 +9,11 @@ RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Declare ARG for GitHub token - Railway passes matching env vars automatically
+# Declare ARG for GitHub token
 ARG GITHUB_TOKEN
+
+# Debug: Check if token is passed (will show length, not value)
+RUN echo "Token length: ${#GITHUB_TOKEN}"
 
 # Disable git credential prompts and install private package
 ENV GIT_TERMINAL_PROMPT=0
