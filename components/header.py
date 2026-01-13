@@ -12,8 +12,9 @@ def create_user_nav():
                 className='relative h-8 w-8 rounded-full',
                 children=[
                     eui.Avatar(
-                        className='h-8 w-8',
+                        className='h-6 w-6',
                         children=[
+                            eui.AvatarImage(src='https://ca.slack-edge.com/T07SVQDLG9Z-U09VCM77CRK-3ece5fd6a4b9-512'),
                             eui.AvatarFallback(children='AN'),
                         ]
                     ),
@@ -31,8 +32,12 @@ def create_user_nav():
                     children=[
                         html.Div([
                             eui.Avatar(
-                                className='h-8 w-8 rounded-lg',
+                                className='h-6 w-6 rounded-lg',
                                 children=[
+                                    eui.AvatarImage(
+                                        src='https://ca.slack-edge.com/T07SVQDLG9Z-U09VCM77CRK-3ece5fd6a4b9-512',
+                                        className='rounded-lg'
+                                    ),
                                     eui.AvatarFallback(
                                         className='rounded-lg',
                                         children='AN'

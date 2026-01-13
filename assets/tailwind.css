@@ -1,0 +1,8 @@
+/* Theme-aware logo switching for .dark class on html element */
+html:not(.dark) .logo-dark {
+    display: none !important;
+}
+
+html.dark .logo-light {
+    display: none !important;
+}

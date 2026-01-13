@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {%metas%}
+    <title>{%title%}</title>
+    {%favicon%}
+    {%css%}
+    <style>
+        /* Initial page load styles */
+        .initial-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: oklch(0.248 0.0264 290.89);
+            z-index: 10000;
+        }
+
+        /* Dash page transition loader */
+        #_dash-loading,
+        ._dash-loading {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: oklch(0.248 0.0264 290.89) !important;
+            z-index: 9999 !important;
+            font-size: 0 !important;
+        }
+
+        /* Loader animation */
+        @keyframes emerald-fill {
+
+            0%,
+            100% {
+                clip-path: inset(100% 0 0 0);
+            }
+
+            50% {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        .emerald-loader-animated {
+            animation: emerald-fill 8.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="initial-loader" id="initial-loader">
+        <div style="position: relative; width: 96px; height: 96px;">
+            <!-- Base layer (gray) -->
+            <svg style="position: absolute; top: 0; left: 0;" width="96" height="96" viewBox="0 0 128 128" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M64 16L16 64H64H112L64 16ZM43.8968 54.4279L64 34.3335L84.1032 54.4279H64H43.8968Z"
+                    fill="#ffffff" opacity="0.2" />
+                <path
+                    d="M87.6527 69.9881L84.072 73.5721H84.1015L64 93.6665L43.8968 73.5721H43.9262L34.364 64H16L64 112L106.017 69.9881H87.6527Z"
+                    fill="#ffffff" opacity="0.2" />
+            </svg>
+            <!-- Animated colored layer -->
+            <svg class="emerald-loader-animated" style="position: absolute; top: 0; left: 0;" width="96" height="96"
+                viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M64 16L16 64H64H112L64 16ZM43.8968 54.4279L64 34.3335L84.1032 54.4279H64H43.8968Z"
+                    fill="#73C67B" />
+                <path
+                    d="M87.6527 69.9881L84.072 73.5721H84.1015L64 93.6665L43.8968 73.5721H43.9262L34.364 64H16L64 112L106.017 69.9881H87.6527Z"
+                    fill="#198E26" />
+            </svg>
+        </div>
+    </div>
+    {%app_entry%}
+    <footer>
+        {%config%}
+        {%scripts%}
+        {%renderer%}
+    </footer>
+    <script>
+        // Hide initial loader once React app mounts
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                var loader = document.getElementById('initial-loader');
+                if (loader) loader.style.display = 'none';
+            }, 100);
+        });
+    </script>
+</body>
+
+</html>

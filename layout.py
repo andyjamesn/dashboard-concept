@@ -31,7 +31,14 @@ def create_layout():
 
                         # Main content - renders the active page
                         html.Div([
-                            page_container,
+                            dcc.Loading(
+                                id='page-loading',
+                                type='default',
+                                children=page_container,
+                                custom_spinner=html.Div([
+                                    eui.Loader(size=48),
+                                ], className='flex items-center justify-center h-full'),
+                            ),
                         ], className='flex-1'),
                     ]),
                 ]

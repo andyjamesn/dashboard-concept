@@ -133,10 +133,16 @@ def create_sidebar():
             eui.SidebarHeader(children=[
                 # Full logo - hidden when collapsed, switches between light/dark versions
                 html.Div([
-                    # Light mode logo (dark text)
-                    html.Img(src='/assets/images/emerald-logo-full.svg', className='h-8 dark:hidden'),
-                    # Dark mode logo (white text)
-                    html.Img(src='/assets/images/emerald-logo-full-reversed.svg', className='h-8 hidden dark:block'),
+                    # Light mode logo (dark text) - visible in light theme only
+                    html.Img(
+                        src='/assets/images/emerald-logo-full.svg',
+                        className='h-8 logo-light'
+                    ),
+                    # Dark mode logo (white text) - visible in dark theme only
+                    html.Img(
+                        src='/assets/images/emerald-logo-full-reversed.svg',
+                        className='h-8 logo-dark'
+                    ),
                 ], className='flex items-center justify-center group-data-[collapsible=icon]:hidden bg-card -m-2 h-16 border-b'),
                 # Widget logo - only shown when collapsed (same for both modes)
                 html.Div([
