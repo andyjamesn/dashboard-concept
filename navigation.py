@@ -471,19 +471,7 @@ NAV_INTERNAL = [
                 'id': 'nav-int-settings-team',
                 'href': '/settings/team',
                 'description': 'Team management'
-            },
-            {
-                'title': 'Billing',
-                'id': 'nav-int-settings-billing',
-                'href': '/settings/billing',
-                'description': 'Billing and subscription'
-            },
-            {
-                'title': 'Limits',
-                'id': 'nav-int-settings-limits',
-                'href': '/settings/limits',
-                'description': 'Usage limits and quotas'
-            },
+            }
         ]
     },
 ]
