@@ -22,9 +22,6 @@ for nav_items in PERSONA_NAVIGATION.values():
 # Stub pages to create (nav hrefs minus existing pages)
 STUB_HREFS = NAV_HREFS - EXISTING_PAGES
 
-# Debug: print what will be registered
-print(f"[stub_pages] Will create stubs for: {STUB_HREFS}")
-
 
 def create_stub_layout(href: str, title: str, description: str, icon: str):
     """Create a stub layout function for a given page."""
