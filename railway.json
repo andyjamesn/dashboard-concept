@@ -1,7 +1,8 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS"
+    "builder": "NIXPACKS",
+    "buildCommand": "pip install git+https://$GITHUB_TOKEN@github.com/ai-emerald/emerald-component-library.git"
   },
   "deploy": {
     "startCommand": "python app.py",
