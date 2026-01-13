@@ -20,4 +20,4 @@ app.layout = create_layout()
 
 # Run the server
 if __name__ == "__main__":
-    app.run(debug=DEBUG, port=PORT)
+    app.run(debug=DEBUG, host='0.0.0.0', port=PORT)

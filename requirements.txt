@@ -3,8 +3,7 @@ dash>=2.14.0
 plotly>=5.18.0
 pandas
 
-# Emerald UI Components (local editable install)
--e /Volumes/Klevv4TB/Work/Clients/EmeraldAI/dashboard-ui
-
-# When ready for GitHub, replace the above with:
-# emerald-ui-components @ git+https://github.com/ai-emerald/emerald-ui-components.git
+# Emerald UI Components
+# For local development: pip install -e /path/to/emerald-component-library
+# For deployment, uses GitHub with token authentication:
+emerald-ui-components @ git+https://github.com/ai-emerald/emerald-component-library.git
